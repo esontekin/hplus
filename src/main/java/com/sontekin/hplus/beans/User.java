@@ -2,19 +2,29 @@ package com.sontekin.hplus.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class User {
 
     @Id
     private int id;
+    @Size(min=6, message = "{username.not.empty}")
     private String username;
+    @Pattern(regexp = "((?=.*[A-Z]).{6,10})", message = "{password.format.should-be}")
     private String password;
     private String gender;
+    @NotNull(message = "{activity.not.empty}")
     private String activity;
+    @NotEmpty(message = "{firstName.not.empty}")
     private String firstName;
+    @NotEmpty(message = "{lastName.not.empty}")
     private String lastName;
-    private String dateOfBirth;
+    private Date dateOfBirth;
 
     public int getId() {
         return id;
@@ -72,11 +82,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 }
