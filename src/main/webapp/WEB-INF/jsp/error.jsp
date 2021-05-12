@@ -26,7 +26,7 @@
     </div><!-- container tagline -->
 </header><!-- #home -->
 <section id="error" class="section">
-<p class = "error">Sorry, dementors have attacked, Professor is attending to it:)</p>
+<p class = "error">Sorry, dementors have attacked, The Doctor is attending to it:)</p>
 </section>
 <footer class="footer">
     <div class="container">
