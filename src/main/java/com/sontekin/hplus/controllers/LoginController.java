@@ -10,13 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Controller
-public class LocalController {
+@SessionAttributes("login")
+public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
@@ -32,17 +34,12 @@ public class LocalController {
 
         executor.execute(()->{
             System.out.println("Thread from the spring mvc task executor: " + Thread.currentThread().getName());
-            try {
-                Thread.sleep(7000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             Optional<User> user = userRepository.findByUsername(login.getUsername());
             if (!user.isPresent()){
                 deferredResult.setErrorResult(new ApplicationException("User not found"));
             }
             else {
-                deferredResult.setResult("search");
+                deferredResult.setResult("forward:/userprofile");
             }
         });
 
